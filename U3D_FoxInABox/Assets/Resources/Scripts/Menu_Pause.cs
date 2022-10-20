@@ -1,15 +1,17 @@
 //========== Neverway 2022 Project Script | Written by Unknown Dev ============
 // 
 // Purpose: 
-// Applied to:  
+// Applied to: 
+// Editor script: 
 // Notes: 
 //
 //=============================================================================
 
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Menu_Title_Functions : MonoBehaviour
+public class Menu_Pause : MonoBehaviour
 {
     //=-----------------=
     // Public Variables
@@ -24,7 +26,6 @@ public class Menu_Title_Functions : MonoBehaviour
     //=-----------------=
     // Reference Variables
     //=-----------------=
-    private System_SceneManager sceneManager;
 
 
     //=-----------------=
@@ -32,10 +33,14 @@ public class Menu_Title_Functions : MonoBehaviour
     //=-----------------=
     private void Start()
     {
-        sceneManager = FindObjectOfType<System_SceneManager>();
+	
     }
 
-
+    private void Update()
+    {
+	
+    }
+    
     //=-----------------=
     // Internal Functions
     //=-----------------=
@@ -44,13 +49,5 @@ public class Menu_Title_Functions : MonoBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
-    public void LoadLobby()
-    {
-        sceneManager.LoadScene("Lobby", 0.5f);
-    }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
 
