@@ -9,64 +9,64 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using Unity.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Menu_Pause : MonoBehaviour
+public class Network_Client : NetworkBehaviour
 {
     //=-----------------=
     // Public Variables
     //=-----------------=
+    public string username;
 
 
     //=-----------------=
     // Private Variables
     //=-----------------=
-    private bool active;
     
     
     //=-----------------=
     // Reference Variables
     //=-----------------=
-    private System_MenuManager menuManager;
 
 
     //=-----------------=
     // Mono Functions
     //=-----------------=
+    private NetworkVariable<FixedString32Bytes> _username 
+	    = new NetworkVariable<FixedString32Bytes>(
+		    "MissingData",
+		    NetworkVariableReadPermission.Everyone,
+		    NetworkVariableWritePermission.Owner);
+
     private void Start()
     {
-	    menuManager = FindObjectOfType<System_MenuManager>();
     }
 
     private void Update()
     {
-	    if (!Input.GetKeyDown(KeyCode.Escape)) return;
-	    if (!active) OpenMenu();
-	    else CloseMenu();
+	    Debug.Log(OwnerClientId + "; UName: " + _username.Value);
+	    if (!IsOwner)
+	    {
+		    
+	    }
+	    else
+	    {
+		    _username.Value = PlayerPrefs.GetString("NetworkClientUsername", "wow");
+	    }
+	    username = _username.Value.ToString();
     }
     
     //=-----------------=
     // Internal Functions
     //=-----------------=
-    private void OpenMenu()
-    {
-	    if (menuManager.menuOpen) return;
-	    Cursor.lockState = CursorLockMode.None;
-	    transform.GetChild(0).gameObject.SetActive(true);
-	    active = true;
-	    menuManager.menuOpen = true;
-    }
     
-    public void CloseMenu()
-    {
-	    transform.GetChild(0).gameObject.SetActive(false);
-	    active = false;
-	    menuManager.menuOpen = false;
-    }
     
     //=-----------------=
     // External Functions
     //=-----------------=
+    
+
 }
 

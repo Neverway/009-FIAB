@@ -27,6 +27,7 @@ public class Menu_Pause_Functions : MonoBehaviour
     // Reference Variables
     //=-----------------=
     private Network_Connection_Manager connectionManager;
+    private System_SceneManager sceneManager;
 
 
     //=-----------------=
@@ -35,6 +36,7 @@ public class Menu_Pause_Functions : MonoBehaviour
     private void Start()
     {
 	    connectionManager = FindObjectOfType<Network_Connection_Manager>();
+	    sceneManager = FindObjectOfType<System_SceneManager>();
     }
 
     private void Update()
@@ -50,9 +52,10 @@ public class Menu_Pause_Functions : MonoBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
-    private void LeaveServer()
+    public void LeaveServer()
     {
-	    connectionManager.NetworkDisconnectClient();
+	    connectionManager.NetworkDisconnect();
+	    sceneManager.LoadScene("Title", 0.5f);
     }
 }
 

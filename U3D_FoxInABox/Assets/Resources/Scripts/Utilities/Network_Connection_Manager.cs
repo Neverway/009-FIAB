@@ -18,7 +18,6 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 
-[RequireComponent(typeof(NetworkManager))]
 public class Network_Connection_Manager : MonoBehaviour
 {
     //=-----------------=
@@ -34,8 +33,8 @@ public class Network_Connection_Manager : MonoBehaviour
     //=-----------------=
     // Reference Variables
     //=-----------------=
-    [SerializeField] private UnityTransport transport;
-    [SerializeField] private NetworkManager networkManager;
+    private UnityTransport transport;
+    private NetworkManager networkManager;
     [SerializeField] private TMP_InputField addressField;
     [SerializeField] private TMP_InputField portField;
 
@@ -43,7 +42,12 @@ public class Network_Connection_Manager : MonoBehaviour
     //=-----------------=
     // Mono Functions
     //=-----------------=
-
+    private void Start()
+    {
+	    transport = FindObjectOfType<UnityTransport>();
+	    networkManager = FindObjectOfType<NetworkManager>();
+    }
+    
 
     //=-----------------=
     // Internal Functions
@@ -68,25 +72,11 @@ public class Network_Connection_Manager : MonoBehaviour
     {
 	    NetworkManager.Singleton.StartClient();
     }
-    [Tooltip("Close the server as long as request is sent from server and not host or client")]
-    public void NetworkCloseServer()
+    [Tooltip("Shutdown the server")]
+    public void NetworkDisconnect()
     {
-	    // Keep hosts & clients from closing server
-	    if (!networkManager.IsServer)
-	    {
-		    print("Cannot shutdown server, requester does not have permission to execute this action");
-			return;
-		}
 	    // Disconnect the server
 	    networkManager.Shutdown();
-    }
-    [Tooltip("Disconnect current local user")]
-    public void NetworkDisconnectClient()
-    {
-	    // Keep servers from disconnecting without proper shutdown
-	    if (networkManager.IsServer) return;
-	    // Disconnect the host or client
-	    NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
     }
     [Tooltip("Set the target network address from TextMeshPro inputField")]
     public void NetworkSetAddress()
