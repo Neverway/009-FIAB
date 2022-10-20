@@ -60,17 +60,17 @@ public class Network_Connection_Manager : MonoBehaviour
     [Tooltip("Connect to target address and port as dedicatedServer")]
     public void NetworkConnectServer()
     {
-	    NetworkManager.Singleton.StartServer();
+	    networkManager.StartServer();
     }
     [Tooltip("Connect to target address and port as host")]
     public void NetworkConnectHost()
     {
-	    NetworkManager.Singleton.StartHost();
+	    networkManager.StartHost();
     }
     [Tooltip("Connect to target address and port as client")]
     public void NetworkConnectClient()
     {
-	    NetworkManager.Singleton.StartClient();
+	    networkManager.StartClient();
     }
     [Tooltip("Shutdown the server")]
     public void NetworkDisconnect()
