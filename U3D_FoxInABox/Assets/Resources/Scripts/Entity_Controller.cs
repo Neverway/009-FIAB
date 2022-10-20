@@ -21,6 +21,9 @@ public class Entity_Controller : MonoBehaviour
     [Header("Jumping")]
     public float jumpForce = 5000;
     public LayerMask groundLayers;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.1f;
+    public float maxDistance = 0.1f;
 
     [Header("Drag")]
     public float groundDrag = 4;
@@ -78,7 +81,7 @@ public class Entity_Controller : MonoBehaviour
     //=-----------------=
     private bool IsGrounded()
     {
-	    return (Physics.SphereCast(transform.position,0.2f,Vector3.down,out var hit,1.1f,groundLayers));
+	    return (Physics.SphereCast(groundCheck.position,groundCheckRadius,Vector3.down,out var hit,maxDistance,groundLayers));
     }
 
 
