@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Menu_Pause_Functions : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Menu_Pause_Functions : MonoBehaviour
     //=-----------------=
     private Network_Connection_Manager connectionManager;
     private System_SceneManager sceneManager;
-    [SerializeField] private GameObject[] toggleActiveOnPlayerSpawn;
+    [SerializeField] private UnityEvent OnPlayerCreated;
 
 
     //=-----------------=
@@ -61,10 +62,7 @@ public class Menu_Pause_Functions : MonoBehaviour
 		    client.InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
 	    }
 
-	    foreach (var _object in toggleActiveOnPlayerSpawn)
-	    {
-		    _object.SetActive(!_object.activeInHierarchy);
-	    }
+	    OnPlayerCreated.Invoke();
     }
     public void LeaveServer()
     {
