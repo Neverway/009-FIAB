@@ -9,6 +9,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Menu_Pause_Functions : MonoBehaviour
@@ -57,7 +58,7 @@ public class Menu_Pause_Functions : MonoBehaviour
     {
 	    foreach (var client in FindObjectsOfType<Network_Client>())
 	    {
-		    client.InstantiatePlayer();
+		    client.InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
 	    }
 
 	    foreach (var _object in toggleActiveOnPlayerSpawn)

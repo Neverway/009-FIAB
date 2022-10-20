@@ -67,11 +67,18 @@ public class Network_Client : NetworkBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
-    public void InstantiatePlayer()
+    public void TryInstantiatePlayerSrpc(ulong requesterID)
     {
 	    if (!IsOwner) return;
+	    InstantiatePlayerServerRpc(requesterID);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void InstantiatePlayerServerRpc(ulong requesterID)
+    {
+	    //if (!IsOwner) return;
 	    var instantiatedPlayer = Instantiate(playerPrefab);
 	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn(true);
+	    instantiatedPlayer.GetComponent<NetworkObject>().ChangeOwnership(requesterID);
     }
     
 
