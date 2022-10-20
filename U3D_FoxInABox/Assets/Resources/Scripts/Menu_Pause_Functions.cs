@@ -28,6 +28,7 @@ public class Menu_Pause_Functions : MonoBehaviour
     //=-----------------=
     private Network_Connection_Manager connectionManager;
     private System_SceneManager sceneManager;
+    [SerializeField] private GameObject[] toggleActiveOnPlayerSpawn;
 
 
     //=-----------------=
@@ -52,6 +53,18 @@ public class Menu_Pause_Functions : MonoBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
+    public void SpawnLocalPlayer()
+    {
+	    foreach (var client in FindObjectsOfType<Network_Client>())
+	    {
+		    client.InstantiatePlayer();
+	    }
+
+	    foreach (var _object in toggleActiveOnPlayerSpawn)
+	    {
+		    _object.SetActive(!_object.activeInHierarchy);
+	    }
+    }
     public void LeaveServer()
     {
 	    connectionManager.NetworkDisconnect();

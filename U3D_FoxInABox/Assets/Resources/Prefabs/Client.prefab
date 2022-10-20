@@ -74,4 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e0bb8c808e0e0bbb3e3e23daea0af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: NetPlayer
+  username: 
+  playerPrefab: {fileID: 6549117575370691151, guid: 3a2584e13d098a1a4bb236bedf7009a9, type: 3}

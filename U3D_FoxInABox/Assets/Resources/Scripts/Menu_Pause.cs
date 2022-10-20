@@ -60,6 +60,7 @@ public class Menu_Pause : MonoBehaviour
     
     public void CloseMenu()
     {
+	    Cursor.lockState = CursorLockMode.Locked;
 	    transform.GetChild(0).gameObject.SetActive(false);
 	    active = false;
 	    menuManager.menuOpen = false;

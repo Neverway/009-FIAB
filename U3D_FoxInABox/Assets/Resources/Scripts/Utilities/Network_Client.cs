@@ -29,6 +29,7 @@ public class Network_Client : NetworkBehaviour
     //=-----------------=
     // Reference Variables
     //=-----------------=
+    [SerializeField] private GameObject playerPrefab;
 
 
     //=-----------------=
@@ -66,6 +67,12 @@ public class Network_Client : NetworkBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
+    public void InstantiatePlayer()
+    {
+	    if (!IsOwner) return;
+	    var instantiatedPlayer = Instantiate(playerPrefab);
+	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn(true);
+    }
     
 
 }
