@@ -23,6 +23,8 @@ public class Network_Connection_Manager : MonoBehaviour
     //=-----------------=
     // Public Variables
     //=-----------------=
+    public string targetAddress;
+    public string targetPort;
 
 
     //=-----------------=
@@ -42,10 +44,23 @@ public class Network_Connection_Manager : MonoBehaviour
     //=-----------------=
     // Mono Functions
     //=-----------------=
-    private void Start()
+    private void Update()
     {
 	    transport = FindObjectOfType<UnityTransport>();
 	    networkManager = FindObjectOfType<NetworkManager>();
+	    
+	    // Create starting NetTarget prefs
+	    if (!PlayerPrefs.HasKey("NetTargetAddress")) PlayerPrefs.SetString("NetTargetAddress", "127.0.0.1");
+	    if (!PlayerPrefs.HasKey("NetTargetPort")) PlayerPrefs.SetString("NetTargetPort", "25565");
+
+	    // Set local vars to NetTarget prefs (makes code look neater)
+	    targetAddress = PlayerPrefs.GetString("NetTargetAddress");
+	    targetPort = PlayerPrefs.GetString("NetTargetPort");
+	    
+	    // Assign NetTarget to transport
+	    transport.ConnectionData.Address = targetAddress;
+	    ushort.TryParse(portField.text, out var port);
+	    transport.ConnectionData.Port = port;
     }
     
 
@@ -65,7 +80,7 @@ public class Network_Connection_Manager : MonoBehaviour
     [Tooltip("Connect to target address and port as host")]
     public void NetworkConnectHost()
     {
-	    networkManager.StartHost();
+		networkManager.StartHost();
     }
     [Tooltip("Connect to target address and port as client")]
     public void NetworkConnectClient()
@@ -82,26 +97,17 @@ public class Network_Connection_Manager : MonoBehaviour
     public void NetworkSetAddress()
     {
 	    // Fallback to localhost address if address is not specified
-	    if (addressField.text == "") transport.ConnectionData.Address = "127.0.0.1";
+	    if (addressField.text == "") PlayerPrefs.SetString("NetTargetAddress", "127.0.0.1");
 	    // Set network address to input field text
-	    else transport.ConnectionData.Address = addressField.text;
+	    else PlayerPrefs.SetString("NetTargetAddress", addressField.text);
     }
     [Tooltip("Set the target network port from TextMeshPro inputField")]
     public void NetworkSetPort()
     {
-	    
-	    // Fallback to 25565 port if port is not specified
-	    if (portField.text == "")
-	    {
-		    ushort.TryParse("25565", out var port);
-		    transport.ConnectionData.Port = port;
-	    }
-	    // Set network port to input field text
-	    else
-	    {
-		    ushort.TryParse(portField.text, out var port);
-		    transport.ConnectionData.Port = port;
-	    }
+	    // Fallback to localhost port if port is not specified
+	    if (portField.text == "") PlayerPrefs.SetString("NetTargetPort", "25565");
+	    // Set network address to input field text
+	    else PlayerPrefs.SetString("NetTargetPort", portField.text);
     }
 }
 

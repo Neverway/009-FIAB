@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -63,6 +64,15 @@ public class Menu_Pause_Functions : MonoBehaviour
 	    }
 
 	    OnPlayerCreated.Invoke();
+    }
+    public void Respawn()
+    {
+	    foreach (var client in FindObjectsOfType<Network_Client>())
+	    {
+		    if(!client.IsOwner) { print("Reject");return; }
+		    client.localPlayer.GetComponent<Rigidbody>().position = new Vector3(0, 0, 0);
+		    print(client.localPlayer.GetComponent<Rigidbody>());
+	    }
     }
     public void LeaveServer()
     {

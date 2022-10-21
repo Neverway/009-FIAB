@@ -30,6 +30,7 @@ public class Network_Client : NetworkBehaviour
     // Reference Variables
     //=-----------------=
     [SerializeField] private GameObject playerPrefab;
+    public GameObject localPlayer;
 
 
     //=-----------------=
@@ -79,6 +80,7 @@ public class Network_Client : NetworkBehaviour
 	    var instantiatedPlayer = Instantiate(playerPrefab);
 	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn(true);
 	    instantiatedPlayer.GetComponent<NetworkObject>().ChangeOwnership(requesterID);
+	    localPlayer = instantiatedPlayer;
     }
     
 
