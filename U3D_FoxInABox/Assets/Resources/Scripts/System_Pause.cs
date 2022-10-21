@@ -41,13 +41,25 @@ public class System_Pause : MonoBehaviour
     //=-----------------=
     public void PauseGame()
     {
-        if (FindObjectOfType<Entity_Input_Player>()) FindObjectOfType<Entity_Input_Player>().canMove = false;
-        if (FindObjectOfType<Player_Turning>()) FindObjectOfType<Player_Turning>().canMove = false;
+        foreach (var player in FindObjectsOfType<Entity_Input_Player>())
+        {
+            player.canMove = false;
+        }
+        foreach (var player in FindObjectsOfType<Player_Turning>())
+        {
+            player.canMove = false;
+        }
     }
     
     public void UnpauseGame()
     {
-        if (FindObjectOfType<Entity_Input_Player>()) FindObjectOfType<Entity_Input_Player>().canMove = true;
-        if (FindObjectOfType<Player_Turning>()) FindObjectOfType<Player_Turning>().canMove = true;
+        foreach (var player in FindObjectsOfType<Entity_Input_Player>())
+        {
+            player.canMove = true;
+        }
+        foreach (var player in FindObjectsOfType<Player_Turning>())
+        {
+            player.canMove = true;
+        }
     }
 }
