@@ -12,7 +12,6 @@
 //           typeOf ushort
 //=============================================================================
 
-using System;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -46,8 +45,20 @@ public class Network_Connection_Manager : MonoBehaviour
     //=-----------------=
     private void Update()
     {
-	    transport = FindObjectOfType<UnityTransport>();
-	    networkManager = FindObjectOfType<NetworkManager>();
+	    if (!transport) transport = FindObjectOfType<UnityTransport>();
+	    if (!networkManager) networkManager = FindObjectOfType<NetworkManager>();
+	    UpdateTargetAddress();
+    }
+    
+
+    //=-----------------=
+    // Internal Functions
+    //=-----------------=
+    private void UpdateTargetAddress()
+    {
+	    // Exit function if we can't change the address
+	    // (null address field is quick way for me to check that it can't be changed)
+	    if (!addressField) return;
 	    
 	    // Create starting NetTarget prefs
 	    if (!PlayerPrefs.HasKey("NetTargetAddress")) PlayerPrefs.SetString("NetTargetAddress", "127.0.0.1");
@@ -61,16 +72,18 @@ public class Network_Connection_Manager : MonoBehaviour
 	    transport.ConnectionData.Address = targetAddress;
 	    ushort.TryParse(portField.text, out var port);
 	    transport.ConnectionData.Port = port;
+	    
+	    // Set input fields to show current address
+	    addressField.transform.GetChild(0).GetComponent<TMP_Text>().text = targetAddress;
+	    portField.transform.GetChild(0).GetComponent<TMP_Text>().text = targetPort;
     }
-    
-
-    //=-----------------=
-    // Internal Functions
-    //=-----------------=
     
     
     //=-----------------=
     // External Functions
+    //=-----------------=
+    //=-----------------=
+    // CONNECT
     //=-----------------=
     [Tooltip("Connect to target address and port as dedicatedServer")]
     public void NetworkConnectServer()
@@ -87,12 +100,20 @@ public class Network_Connection_Manager : MonoBehaviour
     {
 	    networkManager.StartClient();
     }
+    
+    //=-----------------=
+    // DISCONNECT
+    //=-----------------=
     [Tooltip("Shutdown the server")]
     public void NetworkDisconnect()
     {
 	    // Disconnect the server
 	    networkManager.Shutdown();
     }
+    
+    //=-----------------=
+    // NET TARGET ADDRESS
+    //=-----------------=
     [Tooltip("Set the target network address from TextMeshPro inputField")]
     public void NetworkSetAddress()
     {
@@ -100,6 +121,8 @@ public class Network_Connection_Manager : MonoBehaviour
 	    if (addressField.text == "") PlayerPrefs.SetString("NetTargetAddress", "127.0.0.1");
 	    // Set network address to input field text
 	    else PlayerPrefs.SetString("NetTargetAddress", addressField.text);
+	    // Clear field
+	    addressField.text = "";
     }
     [Tooltip("Set the target network port from TextMeshPro inputField")]
     public void NetworkSetPort()
@@ -108,6 +131,8 @@ public class Network_Connection_Manager : MonoBehaviour
 	    if (portField.text == "") PlayerPrefs.SetString("NetTargetPort", "25565");
 	    // Set network address to input field text
 	    else PlayerPrefs.SetString("NetTargetPort", portField.text);
+	    // Clear field
+	    portField.text = "";
     }
 }
 
