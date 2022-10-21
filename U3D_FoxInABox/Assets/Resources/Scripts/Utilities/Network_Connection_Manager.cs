@@ -134,5 +134,25 @@ public class Network_Connection_Manager : MonoBehaviour
 	    // Clear field
 	    portField.text = "";
     }
+    
+    //=-----------------=
+    // SHORT CUTS
+    //=-----------------=
+    [Tooltip("Find the local client object")]
+    public Network_Client NetworkLocalClient()
+    {
+	    // Set default return to null
+	    Network_Client localClient = null;
+	    
+	    // Look through all Network_Client objects in the scene
+	    foreach (var client in FindObjectsOfType<Network_Client>())
+	    {
+		    // Set localClient to client if local client is owner
+		    if (client.IsOwner) localClient = client;
+	    }
+	    
+	    // Return result
+	    return localClient;
+    }
 }
 

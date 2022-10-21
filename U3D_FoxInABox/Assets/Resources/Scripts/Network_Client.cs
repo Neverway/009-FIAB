@@ -7,8 +7,6 @@
 //
 //=============================================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -24,6 +22,11 @@ public class Network_Client : NetworkBehaviour
     //=-----------------=
     // Private Variables
     //=-----------------=
+    private NetworkVariable<FixedString32Bytes> _username 
+	    = new NetworkVariable<FixedString32Bytes>(
+		    "MissingData",
+		    NetworkVariableReadPermission.Everyone,
+		    NetworkVariableWritePermission.Owner);
     
     
     //=-----------------=
@@ -36,50 +39,36 @@ public class Network_Client : NetworkBehaviour
     //=-----------------=
     // Mono Functions
     //=-----------------=
-    private NetworkVariable<FixedString32Bytes> _username 
-	    = new NetworkVariable<FixedString32Bytes>(
-		    "MissingData",
-		    NetworkVariableReadPermission.Everyone,
-		    NetworkVariableWritePermission.Owner);
-
-    private void Start()
-    {
-    }
 
     private void Update()
     {
-	    Debug.Log(OwnerClientId + "; UName: " + _username.Value);
-	    if (!IsOwner)
-	    {
-		    
-	    }
-	    else
-	    {
-		    _username.Value = PlayerPrefs.GetString("NetClientUsername");
-	    }
-	    username = _username.Value.ToString();
+	    UpdateLocalUsername();
     }
     
     //=-----------------=
     // Internal Functions
     //=-----------------=
+    private void UpdateLocalUsername()
+    {
+	    if (IsOwner) _username.Value = PlayerPrefs.GetString("NetClientUsername");
+	    username = _username.Value.ToString();
+    }
     
     
     //=-----------------=
     // External Functions
     //=-----------------=
-    public void TryInstantiatePlayerSrpc(ulong requesterID)
-    {
-	    if (!IsOwner) return;
-	    InstantiatePlayerServerRpc(requesterID);
-    }
+    // Spawn the local player on the server side
     [ServerRpc(RequireOwnership = false)]
     public void InstantiatePlayerServerRpc(ulong requesterID)
     {
-	    //if (!IsOwner) return;
+	    // Create a reference to the instantiated player object
 	    var instantiatedPlayer = Instantiate(playerPrefab);
+	    // Set the player object to destroy on scene change
 	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn(true);
+	    // Set the instantiated player's owner as the client that sent the request 
 	    instantiatedPlayer.GetComponent<NetworkObject>().ChangeOwnership(requesterID);
+	    // Assign the local player on the server side (Need to find a way to do this on client side as well)
 	    localPlayer = instantiatedPlayer;
     }
     

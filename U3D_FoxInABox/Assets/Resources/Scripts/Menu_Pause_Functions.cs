@@ -41,11 +41,6 @@ public class Menu_Pause_Functions : MonoBehaviour
 	    connectionManager = FindObjectOfType<Network_Connection_Manager>();
 	    sceneManager = FindObjectOfType<System_SceneManager>();
     }
-
-    private void Update()
-    {
-	
-    }
     
     //=-----------------=
     // Internal Functions
@@ -57,22 +52,19 @@ public class Menu_Pause_Functions : MonoBehaviour
     //=-----------------=
     public void SpawnLocalPlayer()
     {
-	    foreach (var client in FindObjectsOfType<Network_Client>())
-	    {
-		    client.InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
-	    }
-
+	    // Instantiate the player on the local Network_Client
+	    connectionManager.NetworkLocalClient().InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+		
+	    // Toggle menu items
 	    OnPlayerCreated.Invoke();
     }
+    
     public void Respawn()
     {
-	    foreach (var client in FindObjectsOfType<Network_Client>())
-	    {
-		    if(!client.IsOwner) { print("Reject");return; }
-		    client.localPlayer.GetComponent<Rigidbody>().position = new Vector3(0, 0, 0);
-		    print(client.localPlayer.GetComponent<Rigidbody>());
-	    }
+	    // Reset the local player's position to 0,0,0
+	    connectionManager.NetworkLocalClient().localPlayer.GetComponent<Rigidbody>().position = new Vector3(0, 0, 0);
     }
+    
     public void LeaveServer()
     {
 	    connectionManager.NetworkDisconnect();
