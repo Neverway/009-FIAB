@@ -21,6 +21,8 @@ public class Entity_Input_Player : NetworkBehaviour
     public KeyCode moveRight = KeyCode.D;
     public KeyCode jump = KeyCode.Space;
 
+    public bool canMove = true;
+
 
     //=-----------------=
     // Private Variables
@@ -43,7 +45,7 @@ public class Entity_Input_Player : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner || !canMove) return;
         // Move vertical
         if (Input.GetKey(moveForwards))
         {

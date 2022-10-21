@@ -20,6 +20,8 @@ public class Player_Turning : NetworkBehaviour
     float xRotation;
     public Transform playerBody;
 
+    public bool canMove = true;
+
     //=-----------------=
     // Private Variables
     //=-----------------=
@@ -43,7 +45,7 @@ public class Player_Turning : NetworkBehaviour
 
     private void Update()
     {
-	    if (!IsOwner) return;
+	    if (!IsOwner || !canMove) return;
 	    mouseX = Input.GetAxis("Mouse X") * horizontalSensitivity * Time.deltaTime;
 	    mouseY = Input.GetAxis("Mouse Y") * verticalSensitivity * Time.deltaTime;
 

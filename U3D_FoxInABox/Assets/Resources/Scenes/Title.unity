@@ -2884,7 +2884,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24704
+  m_Name: pb_Mesh142984
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13569,6 +13569,7 @@ GameObject:
   - component: {fileID: 1395797761}
   - component: {fileID: 1395797760}
   - component: {fileID: 1395797759}
+  - component: {fileID: 1395797765}
   - component: {fileID: 1395797758}
   - component: {fileID: 1395797764}
   - component: {fileID: 1395797763}
@@ -13622,10 +13623,34 @@ MonoBehaviour:
   menuOpen: 0
   OnPausingMenusOpen:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1395797765}
+        m_TargetAssemblyTypeName: System_Pause, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPausingMenusClosed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1395797765}
+        m_TargetAssemblyTypeName: System_Pause, Assembly-CSharp
+        m_MethodName: UnpauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1395797760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13722,6 +13747,18 @@ MonoBehaviour:
     LoadSceneTimeOut: 120
     SpawnTimeout: 1
     EnableNetworkLogs: 1
+--- !u!114 &1395797765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395797756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c586348f18a06712af68e14beaca821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1425425068
 Mesh:
   m_ObjectHideFlags: 0
@@ -14330,7 +14367,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24254
+  m_Name: pb_Mesh142532
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
