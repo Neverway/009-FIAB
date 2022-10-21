@@ -51,8 +51,8 @@ public class Menu_Title_Functions : MonoBehaviour
     }
     public void SetUsername(TMP_InputField usernameField)
     {
-        if (usernameField.text == "") PlayerPrefs.SetString("NetworkClientUsername", "NetPlayer");
-        else PlayerPrefs.SetString("NetworkClientUsername", usernameField.text);
+        //if (usernameField.text == "") PlayerPrefs.SetString("NetworkClientUsername", "NetPlayer");
+        //else PlayerPrefs.SetString("NetworkClientUsername", usernameField.text);
     }
     public void QuitGame()
     {

@@ -4,7 +4,7 @@
 //			Start connections for server as either Server, Host, or Client, 
 //			 and allow the target address and port to be modified
 // Applied to: 
-//			The root of the Network Manager
+//			The local system manager
 // Notes:
 //			UnityTransport, the component script that handles connections 
 //			 (among other things), uses a data efficient variable type called 
@@ -70,7 +70,7 @@ public class Network_Connection_Manager : MonoBehaviour
 	    
 	    // Assign NetTarget to transport
 	    transport.ConnectionData.Address = targetAddress;
-	    ushort.TryParse(portField.text, out var port);
+	    ushort.TryParse(PlayerPrefs.GetString("NetTargetPort"), out var port);
 	    transport.ConnectionData.Port = port;
 	    
 	    // Set input fields to show current address

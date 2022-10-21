@@ -55,7 +55,7 @@ public class Network_Client : NetworkBehaviour
 	    }
 	    else
 	    {
-		    _username.Value = PlayerPrefs.GetString("NetworkClientUsername", "wow");
+		    _username.Value = PlayerPrefs.GetString("NetClientUsername");
 	    }
 	    username = _username.Value.ToString();
     }
