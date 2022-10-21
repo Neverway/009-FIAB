@@ -1,14 +1,13 @@
-//========== Neverway 2022 Project Script | Written by Unknown Dev ============
-// 
+//======== Neverway 2022 Project Script | Written by Arthur Aka Liz ===========
+// [G2]
 // Purpose: 
+//			Give functionality to the lobby pause menu options
 // Applied to: 
-// Editor script: 
+//          The root of the lobby pause screen ui element
 // Notes: 
 //
 //=============================================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -54,7 +53,6 @@ public class Menu_Pause_Functions : MonoBehaviour
     {
 	    // Instantiate the player on the local Network_Client
 	    connectionManager.NetworkLocalClient().InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
-		
 	    // Toggle menu items
 	    OnPlayerCreated.Invoke();
     }
@@ -62,7 +60,10 @@ public class Menu_Pause_Functions : MonoBehaviour
     public void Respawn()
     {
 	    // Reset the local player's position to 0,0,0
-	    connectionManager.NetworkLocalClient().localPlayer.GetComponent<Rigidbody>().position = new Vector3(0, 0, 0);
+	    foreach (var player in FindObjectsOfType<Entity_Input_Player>())
+	    {
+		    if (player.IsOwner) player.ResetPosition();
+	    }
     }
     
     public void LeaveServer()

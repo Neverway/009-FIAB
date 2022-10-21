@@ -1,7 +1,9 @@
 //======== Neverway 2022 Project Script | Written by Arthur Aka Liz ===========
-// 
+// [G2]
 // Purpose: 
+//			Give a rigidbody game object the ability to move and jump
 // Applied to: 
+//			A the root of a rigidbody entity
 // Notes: 
 //
 //=============================================================================
@@ -16,18 +18,27 @@ public class Entity_Controller : MonoBehaviour
     //=-----------------=
     [Header("Movement")]
     public Vector3 movement;
+    [Tooltip("How fast the entity will move")]
     public float speed = 1300;
     
     [Header("Jumping")]
+    [Tooltip("How high the entity will jump")]
     public float jumpForce = 5000;
+    [Tooltip("Which layers are considered to be ground (Used for allowing jumping)")]
     public LayerMask groundLayers;
+    [Tooltip("The position to start the ground check spherecast")]
     public Transform groundCheck;
+    [Tooltip("The radius of the ground check spherecast")]
     public float groundCheckRadius = 0.1f;
+    [Tooltip("Max distance downward to check for ground from edge of spherecast")]
     public float maxDistance = 0.1f;
 
     [Header("Drag")]
+    [Tooltip("The drag of the rigidbody when grounded")]
     public float groundDrag = 4;
+    [Tooltip("The drag of the rigidbody when airborne")]
     public float airDrag = 0.2f;
+    [Tooltip("Used to set entity air control (Lower the number, the less control)")]
     public float airMovementMultiplier = 0.1f;
 
 
@@ -53,6 +64,7 @@ public class Entity_Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
+	    // Switch between grounded and airborne movement
 	    switch(IsGrounded())
 	    {
 		    case true:
@@ -71,8 +83,10 @@ public class Entity_Controller : MonoBehaviour
 		    }
 	    }
 	    
+	    // Jump force
 	    entityRigidbody.AddForce(transform.up * currentJumpForce * Time.deltaTime, ForceMode.Force);
 	    
+	    // Keep entity from jumping in air
 	    if (!IsGrounded()) currentJumpForce = 0;
     }
     
@@ -88,10 +102,14 @@ public class Entity_Controller : MonoBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
-    
     public void Jump()
     {
 	    if (IsGrounded()) currentJumpForce = jumpForce;
+    }
+    
+    public void ResetPosition()
+    {
+	    entityRigidbody.position = new Vector3(0, 0, 0);
     }
 }
 

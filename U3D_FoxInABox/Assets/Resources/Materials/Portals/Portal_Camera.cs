@@ -62,7 +62,7 @@ public class Portal_Camera : MonoBehaviour
 	    transform.rotation = quaternion.LookRotation(newCameraDirection, Vector3.up)*new Quaternion(
 		    rotationOffset.value.x,
 		    rotationOffset.value.y,
-		    rotationOffset.value.z,
+		    rotationOffset.value.z*-1,
 		    rotationOffset.value.w);
     }
     

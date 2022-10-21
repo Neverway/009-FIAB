@@ -1,14 +1,14 @@
 //======== Neverway 2022 Project Script | Written by Arthur Aka Liz ===========
-// 
+// [G2]
 // Purpose: 
+//          Freeze entities when the a pausing menu is open
 // Applied to: 
-// Editor script: 
+//          The system manager
 // Notes: 
 //
 //=============================================================================
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class System_Pause : MonoBehaviour
 {
@@ -45,7 +45,7 @@ public class System_Pause : MonoBehaviour
         {
             player.canMove = false;
         }
-        foreach (var player in FindObjectsOfType<Player_Turning>())
+        foreach (var player in FindObjectsOfType<Entity_Input_Player_Rotation>())
         {
             player.canMove = false;
         }
@@ -57,7 +57,7 @@ public class System_Pause : MonoBehaviour
         {
             player.canMove = true;
         }
-        foreach (var player in FindObjectsOfType<Player_Turning>())
+        foreach (var player in FindObjectsOfType<Entity_Input_Player_Rotation>())
         {
             player.canMove = true;
         }

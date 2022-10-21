@@ -1,13 +1,13 @@
-//========== Neverway 2022 Project Script | Written by Unknown Dev ============
-// 
+//======== Neverway 2022 Project Script | Written by Arthur Aka Liz ===========
+// [G2]
 // Purpose: 
+//          Give functionality to the connect to game and quit game title buttons
 // Applied to:  
+//          The root of the title screen ui element
 // Notes: 
 //
 //=============================================================================
 
-using System;
-using TMPro;
 using UnityEngine;
 
 public class Menu_Title_Functions : MonoBehaviour
@@ -47,13 +47,9 @@ public class Menu_Title_Functions : MonoBehaviour
     //=-----------------=
     public void LoadLobby()
     {
-        sceneManager.LoadScene("Lobby-Portal", 0.5f);
+        sceneManager.LoadScene("Lobby", 0.5f);
     }
-    public void SetUsername(TMP_InputField usernameField)
-    {
-        //if (usernameField.text == "") PlayerPrefs.SetString("NetworkClientUsername", "NetPlayer");
-        //else PlayerPrefs.SetString("NetworkClientUsername", usernameField.text);
-    }
+    
     public void QuitGame()
     {
         Application.Quit();

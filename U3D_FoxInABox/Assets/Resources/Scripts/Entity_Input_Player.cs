@@ -1,7 +1,9 @@
 //======== Neverway 2022 Project Script | Written by Arthur Aka Liz ===========
 // 
 // Purpose: 
+//          Allow the local player to posses an entity
 // Applied to: 
+//          The root of an entity controller
 // Notes: 
 //
 //=============================================================================
@@ -15,24 +17,25 @@ public class Entity_Input_Player : NetworkBehaviour
     //=-----------------=
     // Public Variables
     //=-----------------=
-    public KeyCode moveForwards = KeyCode.W;
-    public KeyCode moveBackwards = KeyCode.S;
-    public KeyCode moveLeft = KeyCode.A;
-    public KeyCode moveRight = KeyCode.D;
-    public KeyCode jump = KeyCode.Space;
-
-    public bool canMove = true;
+    [Header("Controls")]
+    [SerializeField] private KeyCode moveForwards = KeyCode.W;
+    [SerializeField] private KeyCode moveBackwards = KeyCode.S;
+    [SerializeField] private KeyCode moveLeft = KeyCode.A;
+    [SerializeField] private KeyCode moveRight = KeyCode.D;
+    [SerializeField] private KeyCode jump = KeyCode.Space;
 
 
     //=-----------------=
     // Private Variables
     //=-----------------=
-    private Entity_Controller entityController;
+    // Used by the system pause script to freeze the player when a menu is open
+    public bool canMove = true;
     
     
     //=-----------------=
     // Reference Variables
     //=-----------------=
+    private Entity_Controller entityController;
 
 
     //=-----------------=
@@ -45,7 +48,9 @@ public class Entity_Input_Player : NetworkBehaviour
 
     private void Update()
     {
+        // Exit if this instance is not the local player, or the local player is frozen
         if (!IsOwner || !canMove) return;
+        
         // Move vertical
         if (Input.GetKey(moveForwards))
         {
@@ -95,5 +100,9 @@ public class Entity_Input_Player : NetworkBehaviour
     //=-----------------=
     // External Functions
     //=-----------------=
+    public void ResetPosition()
+    {
+        entityController.ResetPosition();
+    }
 }
 
