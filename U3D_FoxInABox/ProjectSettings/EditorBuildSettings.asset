@@ -7,17 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Resources/Scenes/Title.unity
-    guid: d012910b9f8083e339e752a0565ba1f3
+    guid: 0eb25ff0efb0e37fe89ba6f48c9a93ac
   - enabled: 1
     path: Assets/Resources/Scenes/Loading.unity
     guid: b4834179f3041a1529b466a1fe7ed903
   - enabled: 1
-    path: Assets/Resources/Scenes/Lobby.unity
-    guid: f44cecc6d6add4abb8e8fabb1adeb893
-  - enabled: 1
-    path: Assets/Resources/Scenes/Lobby-Portal.unity
-    guid: cc197df60b2fc5d838d236e8e3800a24
-  - enabled: 1
-    path: Assets/Resources/Scenes/Dev_DansTextureTest.unity
-    guid: 8b8b7c0e86f8c9496a374309a365d85f
+    path: Assets/Resources/Scenes/S1.unity
+    guid: 4516d2681f6d96811b3c2ed84aa51a2d
   m_configObjects: {}

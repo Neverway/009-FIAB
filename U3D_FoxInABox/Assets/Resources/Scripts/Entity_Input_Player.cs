@@ -49,7 +49,7 @@ public class Entity_Input_Player : NetworkBehaviour
     private void Update()
     {
         // Exit if this instance is not the local player, or the local player is frozen
-        //if (!IsOwner || !canMove) return;
+        if (!IsOwner || !canMove) return;
         
         // Move vertical
         if (Input.GetKey(moveForwards))

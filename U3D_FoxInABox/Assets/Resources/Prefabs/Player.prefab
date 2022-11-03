@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 6549117574663971810}
   - component: {fileID: 6549117574663971811}
   m_Layer: 6
-  m_Name: Face (1)
+  m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1060,8 +1060,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSensitivity: 200
   verticalSensitivity: 200
-  playerBody: {fileID: 6549117575370691139}
   canMove: 1
+  playerBody: {fileID: 6549117575370691139}
 --- !u!114 &4940969454299379952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,7 +1263,8 @@ GameObject:
   - component: {fileID: 213717840283322632}
   - component: {fileID: 6549117575370691143}
   - component: {fileID: 5937785878019248663}
-  - component: {fileID: 1973926231464996405}
+  - component: {fileID: -6345958133204574344}
+  - component: {fileID: 1732410974979951831}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1403,7 +1404,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 1
   Interpolate: 0
---- !u!114 &1973926231464996405
+--- !u!114 &-6345958133204574344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1412,10 +1413,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6549117575370691151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6d10635bd5d157dfb9247f9f652c27a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b3d0487e64364742ac3debcbf073199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableIfNetworkEntity:
+--- !u!114 &1732410974979951831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549117575370691151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d72af6b185c94e0865f24c25ac8fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clientObjects:
   - {fileID: 6549117575077962128}
 --- !u!1 &7502284748704214962
 GameObject:

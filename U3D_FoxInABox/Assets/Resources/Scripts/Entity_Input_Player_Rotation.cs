@@ -42,14 +42,14 @@ public class Entity_Input_Player_Rotation : NetworkBehaviour
     //=-----------------=
     private void Start()
     {
-	    //if (!IsOwner) return;
+	    if (!IsOwner) return;
 	    Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
 	    // Exit if this instance is not the local player, or the local player is frozen
-	    //if (!IsOwner || !canMove) return;
+	    if (!IsOwner || !canMove) return;
 	    
 	    // Get mouse movement
 	    mouseX = Input.GetAxis("Mouse X") * horizontalSensitivity * Time.deltaTime;
