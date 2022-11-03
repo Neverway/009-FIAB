@@ -70,7 +70,7 @@ public class Network_Connection_Manager : MonoBehaviour
 	    
 	    // Assign NetTarget to transport
 	    transport.ConnectionData.Address = targetAddress;
-	    ushort.TryParse(PlayerPrefs.GetString("NetTargetPort"), out var port);
+	    ushort.TryParse(PlayerPrefs.GetString("NetTargetPort", "25565"), out var port);
 	    transport.ConnectionData.Port = port;
 	    
 	    // Set input fields to show current address

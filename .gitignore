@@ -1,2 +1,5 @@
-# Project build files
-[Bb]uilds/
+# Remove project builds folder
+/[Bb]uild/
+/[Bb]uilds/
+# Ignore old project files
+/[Oo]ld/

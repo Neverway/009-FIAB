@@ -52,7 +52,12 @@ public class Menu_Pause_Functions : MonoBehaviour
     public void SpawnLocalPlayer()
     {
 	    // Instantiate the player on the local Network_Client
-	    connectionManager.NetworkLocalClient().InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+	    //connectionManager.NetworkLocalClient().InstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+	    foreach (var client in FindObjectsOfType<Network_Client>())
+	    {
+		    client.OldInstantiatePlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+	    }
+	    
 	    // Toggle menu items
 	    OnPlayerCreated.Invoke();
     }

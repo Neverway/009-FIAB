@@ -72,6 +72,25 @@ public class Network_Client : NetworkBehaviour
 	    localPlayer = instantiatedPlayer;
     }
     
+    public void TryInstantiatePlayerSrpc(ulong requesterID)
+    {
+	    if (!IsOwner) return;
+	    OldInstantiatePlayerServerRpc(requesterID);
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void OldInstantiatePlayerServerRpc(ulong requesterID)
+    {
+	    //if (!IsOwner) return;
+	    // Create a reference to the instantiated player object
+	    var instantiatedPlayer = Instantiate(playerPrefab);
+	    // Set the player object to destroy on scene change
+	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn(true);
+	    // Set the instantiated player's owner as the client that sent the request 
+	    instantiatedPlayer.GetComponent<NetworkObject>().ChangeOwnership(requesterID);
+	    // Assign the local player on the server side (Need to find a way to do this on client side as well)
+	    localPlayer = instantiatedPlayer;
+    }
 
 }
 
