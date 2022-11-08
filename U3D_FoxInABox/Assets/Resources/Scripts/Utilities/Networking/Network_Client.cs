@@ -90,7 +90,7 @@ public class Network_Client : NetworkBehaviour
     {
 	    // Create a reference to the instantiated player object
 	    var instantiatedPlayer = Instantiate(playerPrefab);
-	    // Set the player object to destroy on scene change
+	    // Spawn the player on the network
 	    instantiatedPlayer.GetComponent<NetworkObject>().Spawn();
 	    // Set the instantiated player's owner as the client that sent the request 
 	    instantiatedPlayer.GetComponent<NetworkObject>().ChangeOwnership(requesterID);
