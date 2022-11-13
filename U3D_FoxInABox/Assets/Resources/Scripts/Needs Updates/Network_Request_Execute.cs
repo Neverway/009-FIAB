@@ -65,7 +65,8 @@ public class Network_Request_Execute : NetworkBehaviour
     {
 	    // Create reference to instantiated object
 	    GameObject instantiatedObject = Instantiate(networkResources.networkPrefabs[targetCreateObjectID.Value], targetTransform.position, targetTransform.rotation);
-	    // Spawn the player on the network
+	    // Spawn the object on the network
+	    print(targetTransform.gameObject.name);
 	    print(instantiatedObject.name);
 	    instantiatedObject.GetComponent<NetworkObject>().Spawn();
 	    // Set the instantiated object's owner as the client that sent the request 

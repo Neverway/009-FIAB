@@ -39,6 +39,9 @@ public class Network_Resources : MonoBehaviour
         foreach (var networkPrefab in networkPrefabs)
         {
             // Thanks DavidL#8094!
+            // This line keeps the system from adding duplicate network prefabs (fixes duplicate GlobalObjectIdHash error)
+            NetworkManager.Singleton.RemoveNetworkPrefab(networkPrefab);
+            // Add all network objects to the network manager prefab list
             NetworkManager.Singleton.AddNetworkPrefab(networkPrefab);
         }
     }

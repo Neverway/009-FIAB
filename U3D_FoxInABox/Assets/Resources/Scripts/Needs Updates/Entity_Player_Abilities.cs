@@ -93,8 +93,15 @@ public class Entity_Player_Abilities : NetworkBehaviour
     }
     private void Test()
     {
-	    // Spawn the effect trigger
-	    networkRequest.Create(NetworkManager.Singleton.LocalClientId, defaultCube, shoveTransform, true);
+	    // Look through the clients on the server
+	    foreach (var client in FindObjectsOfType<Network_Client>())
+	    {
+		    // If we're that client
+		    if (client.OwnerClientId == NetworkManager.Singleton.LocalClientId && networkRequest)
+		    {
+			    networkRequest.Create(NetworkManager.Singleton.LocalClientId, defaultCube, shoveTransform, true);
+		    }
+	    }
     }
     
     
